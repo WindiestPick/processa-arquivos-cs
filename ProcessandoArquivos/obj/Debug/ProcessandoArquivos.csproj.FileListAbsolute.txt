@@ -1,0 +1,8 @@
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\bin\Debug\ProcessandoArquivos.exe.config
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\bin\Debug\ProcessandoArquivos.exe
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\bin\Debug\ProcessandoArquivos.pdb
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\obj\Debug\ProcessandoArquivos.csproj.AssemblyReference.cache
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\obj\Debug\ProcessandoArquivos.csproj.SuggestedBindingRedirects.cache
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\obj\Debug\ProcessandoArquivos.csproj.CoreCompileInputs.cache
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\obj\Debug\ProcessandoArquivos.exe
+D:\projetos\Aprendendo C#\ProcessandoArquivos\ProcessandoArquivos\obj\Debug\ProcessandoArquivos.pdb
