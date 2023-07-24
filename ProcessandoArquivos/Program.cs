@@ -15,8 +15,11 @@ namespace ProcessandoArquivos
             List<List<string>> impResult = new List<List<string>>();
             List<List<string>> expResult = new List<List<string>>();
 
-            expResult = filtraDadosExportacao("SP", ".\\arquivos\\EXP_2022.csv");
-            impResult = filtraDadosImportacao("SP", ".\\arquivos\\IMP_2022.csv", expResult);
+            expResult = filtraDadosExportacao("SP", "..\\..\\..\\arquivos\\EXP_2022.csv");
+            Console.WriteLine("terminou exp");
+            impResult = filtraDadosImportacao("SP", "..\\..\\..\\arquivos\\IMP_2022.csv", expResult);
+            Console.WriteLine("terminou imp");
+            exportaArq(impResult, "SP");
 
 
             Console.WriteLine("terminou");
@@ -110,8 +113,8 @@ namespace ProcessandoArquivos
             string[] meses = { "jan", "fev", "mar", "abr", "jun", "jul", "ago", "set", "out", "nov", "dez", "ano" };
             int contador = 0;
 
-            System.IO.File.Create(estado+".csv").Close();
-            System.IO.TextWriter arquivo = System.IO.File.AppendText(estado+".csv");
+            System.IO.File.Create("..\\..\\..\\arquivos\\resultado\\" + estado + ".csv").Close();
+            System.IO.TextWriter arquivo = System.IO.File.AppendText("..\\..\\..\\arquivos\\resultado\\" + estado +".csv");
 
 
             foreach (List<string> ls in lista)
@@ -160,10 +163,25 @@ namespace ProcessandoArquivos
                         {
                             lista.RemoveAt(excl);
                         }
-
+                        if (i+1 == 12)
+                        {
+                            int soma1 = 0;
+                            int soma2 = 0;
+                            int soma3 = 0;
+                            for (int b = 0; b < corpo.Count(); b =+ 3)
+                            {
+                                soma1 += int.Parse(corpo[b]);
+                                soma2 += int.Parse(corpo[b+1]);
+                                soma3 += int.Parse(corpo[b+2]);
+                            }
+                            corpo.Add(soma1.ToString());
+                            corpo.Add(soma2.ToString());
+                            corpo.Add(soma3.ToString());
+                        }
 
 
                     }
+                    arquivo.WriteLine(corpo);
                 }
             }
 
