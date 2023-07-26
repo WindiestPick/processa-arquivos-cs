@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
+using System.Web;
+using System.Xml;
 
 namespace ProcessandoArquivos
 {
@@ -112,6 +114,9 @@ namespace ProcessandoArquivos
         {
             string[] meses = { "jan", "fev", "mar", "abr", "jun", "jul", "ago", "set", "out", "nov", "dez", "ano" };
             int contador = 0;
+            int freio = 0;
+            List<string> ncms = new List<string>();
+            ncms.Add("0");
 
             System.IO.File.Create("..\\..\\..\\arquivos\\resultado\\" + estado + ".csv").Close();
             System.IO.TextWriter arquivo = System.IO.File.AppendText("..\\..\\..\\arquivos\\resultado\\" + estado +".csv");
@@ -119,6 +124,21 @@ namespace ProcessandoArquivos
 
             foreach (List<string> ls in lista)
             {
+                Console.WriteLine("loop");
+                freio = 0;
+                foreach (string n in ncms)
+                {
+                    if (n == ls[0])
+                    {
+                        freio = 1;
+                        break;
+                    }
+                }
+                if (freio == 1)
+                {
+                    continue;
+                }
+
                 if (contador < 1)
                 {
                     List<string> cabecalho = new List<string>();
@@ -129,31 +149,35 @@ namespace ProcessandoArquivos
                         cabecalho.Add(mes + "_imp");
                         cabecalho.Add(mes + "_net");
                     }
-                    arquivo.WriteLine(cabecalho);
+                    
+                    foreach(string c in cabecalho)
+                    {
+                        arquivo.Write(c + ";");
+                    }
+                    arquivo.Write("\n");
                     contador++;
-                    lista.RemoveAt(0);
                 }
                 else
                 {
                     List<string> corpo = new List<string>();
-                    corpo.Add(lista[contador][0]);
+                    corpo.Add(ls[0]);
 
-                    for (int i = 0; i < 13; i++)
+                    for (int i = 1; i < 14; i++)
                     {
                         int excl = -1;
-                        for (int j = 0; i < lista.Count(); i++)
+                        for (int j = 0; j < lista.Count(); j++)
                         {
-                            if (corpo[0] == lista[j][0] && int.Parse(lista[j][1]) == i + 1)
+                            if (corpo[0] == lista[j][0] && int.Parse(lista[j][1]) == i)
                             {
                                 int res = int.Parse(lista[j][2]) - int.Parse(lista[j][3]);
                                 corpo.Add(lista[j][2]);
                                 corpo.Add(lista[j][3]);
-                                corpo.Add(res.ToString());
+                                corpo.Add(res.ToString()); 
                                 excl = j;
                                 break;
                             }
                         }
-                        if (excl == -1 && i + 1 > 13)
+                        if (excl == -1 && i < 14)
                         {
                             corpo.Add("0");
                             corpo.Add("0");
@@ -161,9 +185,10 @@ namespace ProcessandoArquivos
                         }
                         else
                         {
-                            lista.RemoveAt(excl);
+                            ncms.Add(corpo[0]);
                         }
-                        if (i+1 == 12)
+
+                        if (i+1 == 13)
                         {
                             int soma1 = 0;
                             int soma2 = 0;
@@ -181,7 +206,11 @@ namespace ProcessandoArquivos
 
 
                     }
-                    arquivo.WriteLine(corpo);
+                    foreach (string linha in corpo)
+                    {
+                        arquivo.Write(linha + ";");
+                    }
+                    arquivo.Write("\n");
                 }
             }
 
